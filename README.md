@@ -31,8 +31,8 @@ Everything here runs for **$0** — no paid APIs, no cloud infra, no credit card
 *Updated as I complete each day — this reflects what's actually working right now, not the finished target.*
 
 - [x] Day 1 — RAG pipeline: embed → retrieve → generate (ChromaDB + Groq)
-- [ ] Day 2 — Semantic re-ranking (cross-encoder)
-- [ ] Day 3 — LangGraph orchestration + confidence-based fallback
+- [x] Day 2 — Semantic re-ranking (cross-encoder)
+- [x] Day 3 — LangGraph orchestration + confidence-based fallback
 - [ ] Day 4 — Redis caching + evaluation harness
 - [ ] Day 5 — Polish, real measured results, public release
 
