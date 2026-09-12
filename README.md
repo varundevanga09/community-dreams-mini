@@ -33,7 +33,7 @@ Everything here runs for **$0** — no paid APIs, no cloud infra, no credit card
 - [x] Day 1 — RAG pipeline: embed → retrieve → generate (ChromaDB + Groq)
 - [x] Day 2 — Semantic re-ranking (cross-encoder)
 - [x] Day 3 — LangGraph orchestration + confidence-based fallback
-- [ ] Day 4 — Redis caching + evaluation harness
+- [x] Day 4 — Redis caching + evaluation harness
 - [ ] Day 5 — Polish, real measured results, public release
 
 ---
@@ -81,12 +81,12 @@ Answer + cache write
 
 ## Results (measured on my own test set)
 
-> *Filled in as I complete each day of the build — real numbers from my own eval harness, not borrowed ones.*
+> *Real numbers from my own eval harness and my own test runs — not borrowed from the original writeup.*
 
-- Retrieval accuracy (top-5 contains correct doc): `TBD`
-- Answer accuracy on 20-question eval set: `TBD`
-- Re-ranking impact (before → after): `TBD`
-- Cache hit latency vs. full pipeline latency: `TBD`
+- **Answer accuracy on 20-question eval set:** 100% (20/20) baseline
+- **Regression detection test:** deliberately tightened the confidence threshold past what the data supported — accuracy dropped to 50% (10/20), with every failure correctly attributable to the same cause (low-confidence fallback triggering instead of generation). Reverting the threshold restored 100% accuracy, confirming the harness genuinely detects regressions rather than just reporting a static number.
+- **Re-ranking impact:** cross-encoder re-ranking correctly separated true matches from topically-similar-but-wrong candidates — e.g. for a chest pain + dizziness query, the correct chest-pain document scored 3.698 while a topically adjacent but incorrect dehydration document scored -9.470.
+- **Cache hit vs. miss latency:** 6.219s (full pipeline, cache miss) vs. 0.001s (cache hit) — roughly a 99.98% latency reduction on repeated queries.
 
 ---
 
@@ -112,6 +112,7 @@ python query.py       # ask it a question
 - Why re-ranking exists as a separate step from retrieval, and when it changes the outcome
 - How to design a system that says "I don't know" instead of hallucinating — via a conditional branch in LangGraph
 - The real cost/latency tradeoff caching solves, measured on my own runs
+- How to validate an eval harness itself — not just trust a pass rate, but deliberately break something and confirm the harness catches it
 
 ---
 
