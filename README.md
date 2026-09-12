@@ -34,7 +34,7 @@ Everything here runs for **$0** — no paid APIs, no cloud infra, no credit card
 - [x] Day 2 — Semantic re-ranking (cross-encoder)
 - [x] Day 3 — LangGraph orchestration + confidence-based fallback
 - [x] Day 4 — Redis caching + evaluation harness
-- [ ] Day 5 — Polish, real measured results, public release
+- [x] Day 5 — Polish, real measured results, public release
 
 ---
 
